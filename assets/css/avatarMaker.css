@@ -1,0 +1,91 @@
+/*CSS para o Avatar Maker*/
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    min-width: 100dvw;
+    min-height: 100dvh;
+    max-width: 100dvw;
+    max-height: 100dvh;
+    position: relative;
+}
+
+.avatarOpt {
+    width: 70dvw;
+    height: 100dvh;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.start {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 30px;
+    box-sizing: border-box;
+    padding: 50px;
+}
+
+.avatarOpt.start button {
+    width: 20%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    text-align: left;
+    background-color: white;
+    font-size: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.avatarOpt.start button::after {
+    content: "";
+    width: 5px;
+    height: 100vw;
+    background-color: #b0ddff;
+    box-shadow: 0 0 20px 20px #b0ddff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    animation: rotateAnim 5s linear infinite;
+    display: none;
+}
+
+@keyframes rotateAnim {
+    100% {
+        transform: translate(-50%, -50%) rotate(225deg);
+    }
+}
+
+.avatarOpt.start button .in {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    box-sizing: border-box;
+    padding: 0 10px;
+    z-index: 1000;
+    position: relative;
+}
+
+.avatarOpt.start button:hover {
+    background-color: #0078d4;
+    border: none;
+}
+
+.avatarOpt.start button:hover::after {
+    display: block;
+}
+
+.avatarBar {
+    width: 30dvw;
+    height: 100dvh;
+    position: fixed;
+    right: 0;
+    top: 0;
+    background-color: aqua;
+}

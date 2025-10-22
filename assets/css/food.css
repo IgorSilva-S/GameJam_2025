@@ -1,0 +1,12 @@
+#titulo {
+    display: flex;
+    flex-direction: row;
+    font-size: 2rem;
+    font-family: 'Arial', sans-serif;
+    justify-content: center;
+    gap: 20px;
+}
+#titulo img {
+    height: 200px;
+    width: 200px;
+}
