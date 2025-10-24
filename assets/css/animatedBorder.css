@@ -1,0 +1,78 @@
+.animatedBorder {
+    padding: 5px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    text-align: left;
+    background-color: white;
+    font-size: 25px;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+    transition-duration: .16s;
+}
+
+.animatedBorder::after {
+    content: "";
+    width: 1px;
+    height: 100vw;
+    background-color: #b0ddff;
+    box-shadow: 0 0 20px 20px #b0ddff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    animation: rotateAnim 5s linear infinite;
+    display: none;
+}
+
+@keyframes rotateAnim {
+    100% {
+        transform: translate(-50%, -50%) rotate(225deg);
+    }
+}
+
+.animatedBorder .content {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    box-sizing: border-box;
+    padding: 5px 15px;
+    position: relative;
+    border-radius: 3px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+    z-index: 1;
+}
+
+
+.animatedBorder:hover {
+    border: 1px solid #0000;
+    animation: btnColor 2s linear infinite;
+}
+
+@keyframes btnColor {
+    0% {
+        background-color: #0078d4;
+    }
+
+    50% {
+        background-color: #005da8;
+    }
+
+    100% {
+        background-color: #0078d4;
+    }
+}
+
+.animatedBorder:hover::after {
+    display: block;
+}
+
+.animatedBorder:active {
+    border: 1px solid #0000;
+    background-color: #199bff;
+    animation: none;
+}

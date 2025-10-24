@@ -1,0 +1,52 @@
+        <button>
+            <div class="in">
+                <img src="../img/buttonIcons/avatarMaker/bodyIcon.png" alt="">
+                Gênero
+            </div>
+        </button>
+        <button>
+            <div class="in">
+                <img src="../img/buttonIcons/avatarMaker/hatIcon.png" alt="">
+                Chapeu
+            </div>
+        </button>
+        <button>
+            <div class="in">
+                <img src="../img/buttonIcons/avatarMaker/hairIcon.png" alt="">
+                Algas
+            </div>
+        </button>
+        <button>
+            <div class="in">
+                <img src="../img/buttonIcons/avatarMaker/eyeIcon.png" alt="">
+                Olho
+            </div>
+        </button>
+        <button>
+            <div class="in">
+                <img src="../img/buttonIcons/avatarMaker/barbtIcon.png" alt="">
+                Barbatanas
+            </div>
+        </button>
+        <button>
+            <div class="in">
+                <img src="../img/buttonIcons/avatarMaker/mouthIcon.png" alt="">
+                Boca
+            </div>
+        </button>
+        <button>
+            <div class="in">
+                <img src="../img/buttonIcons/avatarMaker/acessoryIcon.png" alt="">
+                Acessório
+            </div>
+        </button>
+        <button>
+            <div class="in">
+                <img src="../img/buttonIcons/avatarMaker/colorIcon.png" alt="">
+                Cores
+            </div>
+        </button>
+
+        <button class="end">
+            <div class="in">Salvar e sair</div>
+        </button>
