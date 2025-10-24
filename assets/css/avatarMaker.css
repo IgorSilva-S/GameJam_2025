@@ -94,6 +94,12 @@ video {
     background-color: #eee;
 }
 
+.content .img {
+    position: absolute;
+    height: 100%;
+    background-color: aqua;
+}
+
 .avatarBar {
     width: 30dvw;
     height: 100dvh;
