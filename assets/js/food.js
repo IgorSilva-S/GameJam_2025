@@ -152,7 +152,7 @@ document.addEventListener('keydown', function(event) {
                 console.log('✅ Pedido correto! ✅')
                 pedidoCorreto.remove()
                 entrega.innerHTML = ''
-                criarPedido
+                criarPedido()
             } else if (pedidoCorreto == false) {
                 console.log('❌ Pedido errado! ❌')
                 entrega.innerHTML = ''
