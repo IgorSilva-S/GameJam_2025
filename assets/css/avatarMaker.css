@@ -10,6 +10,19 @@ body {
     max-width: 100dvw;
     max-height: 100dvh;
     position: relative;
+    background-position: center;
+    background-size: cover;
+}
+
+video {
+    position: absolute;
+    width: 100dvw;
+    height: 100dvh;
+    top: 0;
+    left: 0;
+    object-fit: cover;
+    object-position: center;
+    z-index: -1;
 }
 
 .avatarOpt {
@@ -44,6 +57,12 @@ body {
     box-sizing: border-box;
     flex-grow: 1;
     transition-duration: .16s;
+}
+
+.transpEl {
+    opacity: 0;
+    width: 0px;
+    height: 0px;
 }
 
 .avatarOpt.start input {
@@ -93,13 +112,13 @@ body {
     background-color: white;
     box-sizing: border-box;
     padding: 5px 15px;
-    z-index: 1000;
     position: relative;
     border-radius: 3px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     gap: 20px;
+    z-index: 1;
 }
 
 .avatarOpt.start button.end .in {
@@ -120,9 +139,11 @@ body {
     0% {
         background-color: #0078d4;
     }
+
     50% {
-        background-color: #013157;
+        background-color: #005da8;
     }
+
     100% {
         background-color: #0078d4;
     }
@@ -145,5 +166,11 @@ body {
     position: fixed;
     right: 0;
     top: 0;
-    background-color: aqua;
+}
+
+.avatarBar img {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
 }
