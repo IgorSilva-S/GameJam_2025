@@ -34,11 +34,19 @@ const tiposSalada = ['Alga 1', 'Alga 2', 'Tomate']
 const tiposCarne = ['Peixe', 'Plancton', 'Camarao']
 
 function startGame(params) {
-    
+    pedidosDiv.innerHTML = ''
+    criarPedido()
+    for (const esteira in esteiras) {
+        esteira.innerHTML = ''
+    }
+    lixo.innerHTML = ''
+    entrega.innerHTML = ''
 }
+document.onload = startGame()
 
 function endGame() {
     alert('Game Over! Suas vidas acabaram.')
+    startGame()
 }
 
 function verificarPedido(entrega, pedidosContainer) {
@@ -67,8 +75,8 @@ function criarPrato() {
 }
 
 function colocarIngrediente(ingrediente, esteira) {
-    if (ingrediente == 'Pão redondo inferior' && esteiras[esteira].querySelector('img').src?.includes('Pão redondo inferior.png')) {
-        ingrediente == 'Pão redondo superior'
+    if (ingrediente == 'Pão redondo inferior' && esteiras[esteira].childElementCount > 1) {
+        ingrediente = 'Pão redondo superior'
     }
     const img = document.createElement('img')
     img.src = `../img/icons/food/${ingrediente}.png`
@@ -144,10 +152,12 @@ document.addEventListener('keydown', function(event) {
                 console.log('✅ Pedido correto! ✅')
                 pedidoCorreto.remove()
                 entrega.innerHTML = ''
+                criarPedido
             } else if (pedidoCorreto == false) {
                 console.log('❌ Pedido errado! ❌')
                 entrega.innerHTML = ''
                 lifes -= 1
+                criarPedido()
             }
         }
         
