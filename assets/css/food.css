@@ -42,6 +42,33 @@ body {
     border-radius: 25px;
     font-family: Arial, Helvetica, sans-serif;
 }
+#esteira {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+#espaços {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+#espaços div {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 0px;
+    background-color: snow;
+    min-width: 150px;
+    min-height: 150px;
+}
+#espaços div img {
+    width: 74px;
+    height: 28px;
+}
 #pc {
     position: relative;
     top: -10px;
@@ -53,4 +80,45 @@ body {
     top: -93px;
     width: 90px;
     height: 60px;
+}
+#esteira {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+#ingredientes {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+#ingredientes div {
+    display: grid;
+    grid-template-columns: 74px 74px;
+    grid-template-rows: 28px 28px;
+    gap: 10px;
+}
+#ingredientes div div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 74px;
+    height: 28px;
+    gap: 0px;
+}
+#ingredientes div div:hover {
+    cursor: pointer;
+}
+#ingredientes div #pão-redondo img {
+    width: 37px;
+    height: 28px;
+}
+#ingredientes div * {
+    background-color: white;
+    outline: black solid 1px;
 }
