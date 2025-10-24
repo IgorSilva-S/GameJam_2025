@@ -42,6 +42,10 @@ body {
     border-radius: 25px;
     font-family: Arial, Helvetica, sans-serif;
 }
+#pedidos .pedido {
+    display: flex;
+    flex-direction: column-reverse;
+}
 #esteira {
     display: flex;
     flex-direction: column;

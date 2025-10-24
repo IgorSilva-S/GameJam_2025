@@ -2,9 +2,15 @@ const pedidosDiv = document.getElementById('pedidos')
 const pedidos = {
 
 }
-// for (const p of pedidosDiv.querySelectorAll('.pedido')){
+// Função para popular o objeto pedidos com os elementos .pedido
+for (let i = 0; i < pedidosDiv.querySelectorAll('.pedido').length; i++) {
+    pedidos[i] = pedidosDiv.querySelectorAll('.pedido')[i]
+}
+
+// for (const p in pedidosDiv.querySelectorAll('.pedido')){
 //     pedidos[pedidos.length] = p
 // }
+console.log(pedidos[1])
 const esteira = document.getElementById('esteira')
 const pao = esteira.querySelector('#pao')
 const salada = esteira.querySelector('#salada')
@@ -23,6 +29,9 @@ const esteiras = {
 let lifes = 5
 const lixo = esteira.querySelector('#lixo')
 const entrega = esteira.querySelector('#entrega')
+const tiposPao = ['Pão quadrado', 'Pão redondo inferior', 'Pão triangular']
+const tiposSalada = ['Alga 1', 'Alga 2', 'Tomate']
+const tiposCarne = ['Peixe', 'Plancton', 'Camarao']
 
 function startGame(params) {
     
@@ -48,7 +57,7 @@ function verificarPedido(entrega, pedidosContainer) {
         }
     }
 
-    return null
+    return false
 }
 
 function criarPrato() {
@@ -64,6 +73,48 @@ function colocarIngrediente(ingrediente, esteira) {
     const img = document.createElement('img')
     img.src = `../img/icons/food/${ingrediente}.png`
     esteiras[esteira].appendChild(img)
+}
+
+function criarPedido() {
+    const novoPedido = document.createElement('div')
+    novoPedido.classList.add('pedido')
+    const prato = document.createElement('img')
+    prato.src = '../img/icons/food/prato.png'
+    novoPedido.appendChild(prato)
+    const tipoPao = tiposPao[Math.floor(Math.random() * tiposPao.length)]
+    const tipoSalada = tiposSalada[Math.floor(Math.random() * tiposSalada.length)]
+    const tipoCarne = tiposCarne[Math.floor(Math.random() * tiposCarne.length)]
+    const imgPao = document.createElement('img')
+    imgPao.src = `../img/icons/food/${tipoPao}.png`
+    const imgSalada = document.createElement('img')
+    imgSalada.src = `../img/icons/food/${tipoSalada}.png`
+    const imgCarne = document.createElement('img')
+    imgCarne.src = `../img/icons/food/${tipoCarne}.png`
+    novoPedido.appendChild(imgPao)
+    novoPedido.appendChild(imgSalada)
+    novoPedido.appendChild(imgCarne)
+    if (Math.random() > 0.85) {
+        const tipoSalada2 = tiposSalada[Math.floor(Math.random() * tiposSalada.length)]
+        const imgSalada2 = document.createElement('img')
+        imgSalada2.src = `../img/icons/food/${tipoSalada2}.png`
+        novoPedido.appendChild(imgSalada2)
+    }
+    if (Math.random() > 0.9) {
+        const tipoCarne2 = tiposCarne[Math.floor(Math.random() * tiposCarne.length)]
+        const imgCarne2 = document.createElement('img')
+        imgCarne2.src = `../img/icons/food/${tipoCarne2}.png`
+        novoPedido.appendChild(imgCarne2)
+    }
+    if (tipoPao == 'Pão redondo inferior') {
+        const novoPao = document.createElement('img')
+        novoPao.src = `../img/icons/food/Pão redondo superior.png`
+        novoPedido.appendChild(novoPao)
+    } else {
+        const novoPao = document.createElement('img')
+        novoPao.src = `../img/icons/food/${tipoPao}.png`
+        novoPedido.appendChild(novoPao)
+    }
+    pedidosDiv.appendChild(novoPedido)
 }
 
 document.addEventListener('keydown', function(event) {
@@ -87,44 +138,50 @@ document.addEventListener('keydown', function(event) {
         }
     }
     if (event.key === 'd' || event.key === 'ArrowRight') {
-        if (esteiras[4].childElementCount === 0) {
+        if (entrega.childElementCount > 0) {
             const pedidoCorreto = verificarPedido(entrega, pedidosDiv)
             if (pedidoCorreto) {
                 console.log('✅ Pedido correto! ✅')
                 pedidoCorreto.remove()
                 entrega.innerHTML = ''
-            } else {
+            } else if (pedidoCorreto == false) {
                 console.log('❌ Pedido errado! ❌')
                 entrega.innerHTML = ''
                 lifes -= 1
             }
-            
-            while (lixo.firstElementChild) {
-                entrega.appendChild(lixo.firstElementChild)
-            }
-            
-            while (esteiras[4].firstElementChild) {
-                lixo.appendChild(esteiras[4].firstElementChild)
-            }
-
+        }
+        
+        while (lixo.firstElementChild) {
+            entrega.appendChild(lixo.firstElementChild)
+        }
+        
+        while (esteiras[4].firstElementChild) {
+            lixo.appendChild(esteiras[4].firstElementChild)
+        }
+        
+        if (lixo.childElementCount > 0) {
             const lixoCorreto = verificarPedido(lixo, pedidosDiv)
-            if (lixoCorreto) {
-            } else {
-                console.log('❌ Pedido errado! ❌')
+            if (lixoCorreto === false) {
+                console.log('❌ Pedido errado no lixo! ❌')
                 lixo.innerHTML = ''
                 lifes -= 1
+            } else if (lixoCorreto) {
+                console.log('♻️ Pedido correto aguardando entrega...')
             }
+        }
 
-            for (let i = 3; i >= 1; i--) {
-                if (esteiras[i].childElementCount > 0) {
-                    while (esteiras[i].firstElementChild) {
-                        esteiras[i + 1].appendChild(esteiras[i].firstElementChild)
-                    }
+        for (let i = 3; i >= 1; i--) {
+            if (esteiras[i].childElementCount > 0) {
+                while (esteiras[i].firstElementChild) {
+                    esteiras[i + 1].appendChild(esteiras[i].firstElementChild)
                 }
             }
         }
+        
     }
     if (lifes == 0) {
         endGame()
     }
 })
+// O prato chegou na entrega, estava certo porém deu "Pedido errado". Por que isso aconteceu?
+// 
