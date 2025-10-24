@@ -1,5 +1,6 @@
 const memoryGrid = document.querySelector("#memoryGrid")
-let maxCardCount = 3
+let maxCardCount = 2
+let activeCards = []
 
 let cards = [
     {
@@ -49,12 +50,22 @@ function addCards() {
         newCard.appendChild(cardBack)
         cardContainer.appendChild(newCard)
         memoryGrid.appendChild(cardContainer)
+
         cardContainer.addEventListener('click', () => {
+            activeCards.push(newCard)
+
+            if (activeCards.length === 2) {
+                setTimeout(() => {
+                    for (const card of activeCards) {
+                        card.style.transform = "rotateY(0deg)"
+                        activeCards = []
+                    }
+                }, 1500);
+            }
+
             newCard.style.transform = "rotateY(180deg)"
-            setTimeout(() => {
-                newCard.style.transform = "rotateY(0deg)"
-            }, 2000);
         })
+
     }
 }
 addCards()
