@@ -30,7 +30,7 @@ let lifes = 5
 const lixo = esteira.querySelector('#lixo')
 const entrega = esteira.querySelector('#entrega')
 const tiposPao = ['Pão quadrado', 'Pão redondo inferior', 'Pão triangular']
-const tiposSalada = ['Alga 1', 'Alga 2', 'Tomate']
+const tiposSalada = ['Alga', 'Fitoplancton', 'Tomate']
 const tiposCarne = ['Peixe', 'Plancton', 'Camarao']
 
 function startGame(params) {
@@ -50,27 +50,45 @@ function endGame() {
 }
 
 function verificarPedido(entrega, pedidosContainer) {
-    const entregaImgs = Array.from(entrega.querySelectorAll('img')).map(img => img.src)
-
-    const pedidos = Array.from(pedidosContainer.querySelectorAll('.pedido'))
-
-    for (const pedido of pedidos) {
-        const pedidoImgs = Array.from(pedido.querySelectorAll('img')).map(img => img.src)
-
-        const mesmoTamanho = pedidoImgs.length === entregaImgs.length
-        const todosIguais = mesmoTamanho && pedidoImgs.every(src => entregaImgs.includes(src))
-
-        if (todosIguais) {
-            return pedido
+    // Função para extrair o nome do arquivo da URL da imagem
+    const getFilename = (src) => {
+        try {
+            return decodeURIComponent(new URL(src, location.href).pathname.split('/').pop());
+        } catch {
+            return src;
         }
     }
 
-    return false
+    const entregaImgs = Array.from(entrega.querySelectorAll('img')).map(img => getFilename(img.src));
+    const pedidos = Array.from(pedidosContainer.querySelectorAll('.pedido'));
+
+    for (const pedido of pedidos) {
+        const pedidoImgs = Array.from(pedido.querySelectorAll('img')).map(img => getFilename(img.src));
+
+        // mesmo comprimento
+        if (pedidoImgs.length !== entregaImgs.length) continue;
+
+        // mesma ordem e mesmas ocorrências (comparação elemento a elemento)
+        let ordemIgual = true;
+        for (let i = 0; i < pedidoImgs.length; i++) {
+            if (pedidoImgs[i] !== entregaImgs[i]) {
+                ordemIgual = false;
+                break;
+            }
+        }
+
+        if (ordemIgual) {
+            return pedido;
+        }
+    }
+
+    return false;
 }
 
 function criarPrato() {
     const prato = document.createElement('img')
     prato.src = '../img/icons/food/prato.png'
+    prato.classList.add('prato')
     esteira1.appendChild(prato)
 }
 
@@ -80,6 +98,12 @@ function colocarIngrediente(ingrediente, esteira) {
     }
     const img = document.createElement('img')
     img.src = `../img/icons/food/${ingrediente}.png`
+    if (ingrediente == 'Pão redondo inferior' || ingrediente == 'Pão redondo superior') {
+        img.classList.add('pão')
+        img.classList.add('redondo')
+    } else if (ingrediente == 'Pão quadrado' || ingrediente == 'Pão triangular') {
+        img.classList.add('pão')
+    }
     esteiras[esteira].appendChild(img)
 }
 
@@ -88,12 +112,17 @@ function criarPedido() {
     novoPedido.classList.add('pedido')
     const prato = document.createElement('img')
     prato.src = '../img/icons/food/prato.png'
+    prato.classList.add('prato')
     novoPedido.appendChild(prato)
     const tipoPao = tiposPao[Math.floor(Math.random() * tiposPao.length)]
     const tipoSalada = tiposSalada[Math.floor(Math.random() * tiposSalada.length)]
     const tipoCarne = tiposCarne[Math.floor(Math.random() * tiposCarne.length)]
     const imgPao = document.createElement('img')
     imgPao.src = `../img/icons/food/${tipoPao}.png`
+    imgPao.classList.add('pão')
+    if (tipoPao == 'Pão redondo inferior') {
+        imgPao.classList.add('redondo')
+    }
     const imgSalada = document.createElement('img')
     imgSalada.src = `../img/icons/food/${tipoSalada}.png`
     const imgCarne = document.createElement('img')
@@ -116,10 +145,13 @@ function criarPedido() {
     if (tipoPao == 'Pão redondo inferior') {
         const novoPao = document.createElement('img')
         novoPao.src = `../img/icons/food/Pão redondo superior.png`
+        novoPao.classList.add('pão')
+        novoPao.classList.add('redondo')
         novoPedido.appendChild(novoPao)
     } else {
         const novoPao = document.createElement('img')
         novoPao.src = `../img/icons/food/${tipoPao}.png`
+        novoPao.classList.add('pão')
         novoPedido.appendChild(novoPao)
     }
     pedidosDiv.appendChild(novoPedido)
