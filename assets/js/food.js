@@ -31,7 +31,7 @@ const lixo = esteira.querySelector('#lixo')
 const entrega = esteira.querySelector('#entrega')
 const tiposPao = ['Pão quadrado', 'Pão redondo inferior', 'Pão triangular']
 const tiposSalada = ['Alga', 'Fitoplancton', 'Tomate']
-const tiposCarne = ['Peixe', 'Plancton', 'Camarao']
+const tiposCarne = ['Peixe', 'Planctons', 'Camarao']
 
 function startGame(params) {
     pedidosDiv.innerHTML = ''
